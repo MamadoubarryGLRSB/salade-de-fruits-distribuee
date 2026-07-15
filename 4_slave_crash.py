@@ -25,10 +25,10 @@ class SlaveCrashService(rpyc.Service):
     """Expose la préparation d'un fruit, mais peut crasher."""
 
     def on_connect(self, conn):
-        print("📡 Maître connecté.")
+        print(" Maître connecté.")
 
     def on_disconnect(self, conn):
-        print("📴 Maître déconnecté.")
+        print(" Maître déconnecté.")
 
     def exposed_preparer_fruit(self, fruit):
         """
@@ -37,12 +37,12 @@ class SlaveCrashService(rpyc.Service):
         """
         # ── Crash aléatoire ──
         if random.random() < PROBA_CRASH:
-            print(f"💀 CRASH pendant la préparation de : {fruit}")
+            print(f" CRASH pendant la préparation de : {fruit}")
             print(f"   L'esclave meurt brutalement (panne franche).")
             os._exit(1)  # mort immédiate — le processus disparaît
 
         # ── Préparation normale ──
-        print(f"🔪 Préparation de : {fruit} …")
+        print(f" Préparation de : {fruit} …")
         time.sleep(3)
         print(f"✅ {fruit} prêt !")
         return f"{fruit} prêt"
@@ -57,7 +57,7 @@ if __name__ == "__main__":
     port = int(sys.argv[1])
 
     print("=" * 50)
-    print(f"🧑‍🍳 ESCLAVE (CRASH) — port {port}")
+    print(f"‍ ESCLAVE (CRASH) — port {port}")
     print("=" * 50)
     print(f"⚠️  Probabilité de crash : {PROBA_CRASH*100:.0f}%")
     print(f"En attente de tâches du maître…")

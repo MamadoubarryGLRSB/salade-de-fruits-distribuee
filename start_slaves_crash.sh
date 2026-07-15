@@ -1,6 +1,6 @@
 #!/bin/bash
 # Lance 3 esclaves CRASH (étape 3 & 4) en parallèle
-echo "🚀 Lancement de 3 esclaves (CRASH) sur les ports 18861, 18862, 18863…"
+echo " Lancement de 3 esclaves (CRASH) sur les ports 18861, 18862, 18863…"
 echo "⚠️  Ces esclaves ont 30% de chance de crasher pendant une tâche."
 echo ""
 

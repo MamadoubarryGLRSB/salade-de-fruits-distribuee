@@ -20,14 +20,14 @@ class MonService(rpyc.Service):
     """Service de test : expose une seule méthode qui renvoie 42."""
 
     def on_connect(self, conn):
-        print("📡 Un client s'est connecté.")
+        print(" Un client s'est connecté.")
 
     def on_disconnect(self, conn):
-        print("📴 Un client s'est déconnecté.")
+        print(" Un client s'est déconnecté.")
 
     def exposed_repondre(self):
         """Méthode exposée au réseau — renvoie 42."""
-        print("📨 Requête reçue → je renvoie 42")
+        print(" Requête reçue → je renvoie 42")
         return 42
 
 # ─── Lancement du serveur ───────────────────────────────────────────
@@ -35,7 +35,7 @@ if __name__ == "__main__":
     PORT = 18861
 
     print("=" * 50)
-    print("🖥  SERVEUR RPC MINIMAL")
+    print("  SERVEUR RPC MINIMAL")
     print("=" * 50)
     print(f"En écoute sur le port {PORT}…")
     print(f"Testez avec :")

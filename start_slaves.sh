@@ -1,6 +1,6 @@
 #!/bin/bash
 # Lance 3 esclaves de base (étape 2) en parallèle
-echo "🚀 Lancement de 3 esclaves sur les ports 18861, 18862, 18863…"
+echo " Lancement de 3 esclaves sur les ports 18861, 18862, 18863…"
 python3 2_slave.py 18861 &
 python3 2_slave.py 18862 &
 python3 2_slave.py 18863 &

@@ -41,7 +41,7 @@ def travailler(port):
 
     try:
         conn = rpyc.connect("localhost", port)
-        print(f"📡 {nom} connecté.")
+        print(f" {nom} connecté.")
     except Exception as e:
         print(f"❌ {nom} — connexion impossible : {e}")
         return
@@ -53,7 +53,7 @@ def travailler(port):
                 break
             fruit = pile_taches.pop(0)
 
-        print(f"📤 {nom} ← tâche : {fruit}")
+        print(f" {nom} ← tâche : {fruit}")
 
         try:
             # ── APPEL RPC AVEC TIMEOUT ──
@@ -75,12 +75,12 @@ def travailler(port):
                 # ── DÉDUPLICATION ──
                 # On vérifie si ce fruit n'est pas DEJA dans notre liste de fruits terminés
                 if fruit in taches_terminees:
-                    print(f"🔁 {nom} — doublon ignoré pour « {fruit} »")
+                    print(f" {nom} — doublon ignoré pour « {fruit} »")
                 else:
                     # C'est la première fois qu'on termine ce fruit. On l'ajoute au set.
                     taches_terminees.add(fruit)
                     resultats.append(resultat) # Et on garde le vrai résultat
-                    print(f"📥 {nom} → résultat : {resultat}")
+                    print(f" {nom} → résultat : {resultat}")
 
         except Exception as e:
             # ── Si on arrive ici, l'appel a ÉCHOUÉ (Crash ou Timeout) ──
@@ -93,24 +93,24 @@ def travailler(port):
                 if fruit not in taches_terminees:
                     # On le REMET DANS LA PILE à la fin. Un autre thread/esclave le prendra.
                     pile_taches.append(fruit)
-                    print(f"🔄 « {fruit} » remis dans la pile (redistribution)")
+                    print(f" « {fruit} » remis dans la pile (redistribution)")
 
             # L'esclave a planté. On essaie de se reconnecter à lui (peut-être qu'il a redémarré ?)
             try:
                 conn = rpyc.connect("localhost", port)
-                print(f"🔌 {nom} — reconnexion réussie !")
+                print(f" {nom} — reconnexion réussie !")
             except Exception:
                 # Si on ne peut pas se reconnecter, c'est qu'il est bien mort.
-                print(f"💀 {nom} — reconnexion impossible, esclave mort.")
+                print(f" {nom} — reconnexion impossible, esclave mort.")
                 break  # Le 'break' sort du While True, le Thread meurt.
 
-    print(f"🏁 {nom} a terminé.")
+    print(f" {nom} a terminé.")
 
 # ─── Programme principal ────────────────────────────────────────────
 if __name__ == "__main__":
     # Le démarrage est identique au maître précédent
     print("=" * 55)
-    print("👨‍🍳 MAÎTRE ROBUSTE — TIMEOUT + DÉDUPLICATION")
+    print("‍ MAÎTRE ROBUSTE — TIMEOUT + DÉDUPLICATION")
     print("=" * 55)
     
     debut = time.time()
@@ -133,7 +133,7 @@ if __name__ == "__main__":
     # Grâce à la redistribution, on a la GARANTIE que la liste de résultats est complète,
     # sauf si TOUS les esclaves sont morts avant d'avoir fini.
     if len(resultats) == len(FRUITS):
-        print("🥗 SALADE TERMINÉE — TOUS LES FRUITS PRÉPARÉS !")
+        print(" SALADE TERMINÉE — TOUS LES FRUITS PRÉPARÉS !")
     else:
         print(f"⚠️  SALADE INCOMPLÈTE — {len(resultats)}/{len(FRUITS)} fruits")
         print(f"   (tous les esclaves sont morts avant de finir)")

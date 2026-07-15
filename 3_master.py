@@ -44,7 +44,7 @@ def travailler(port):
     try:
         # On se connecte à l'esclave. "localhost" veut dire que l'esclave est sur le même ordinateur.
         conn = rpyc.connect("localhost", port)
-        print(f"📡 {nom} connecté.")
+        print(f" {nom} connecté.")
     except Exception as e:
         # Si on n'arrive pas à se connecter (par exemple si on a oublié de lancer l'esclave)
         print(f"❌ {nom} — connexion impossible : {e}")
@@ -64,7 +64,7 @@ def travailler(port):
             fruit = pile_taches.pop(0)
             # Fin de l'indentation 'with lock' : le verrou est automatiquement relâché ici !
 
-        print(f"📤 {nom} ← tâche : {fruit}")
+        print(f" {nom} ← tâche : {fruit}")
 
         # ── Appel RPC distant ──
         # Note qu'on est EN DEHORS du verrou. C'est crucial : on ne veut pas bloquer 
@@ -77,16 +77,16 @@ def travailler(port):
         # Comme c'est une liste partagée, on doit remettre le verrou.
         with lock:
             resultats.append(resultat)
-            print(f"📥 {nom} → résultat : {resultat}")
+            print(f" {nom} → résultat : {resultat}")
 
     # On ferme proprement la connexion quand il n'y a plus de fruits
     conn.close()
-    print(f"🏁 {nom} a fini (plus de tâches).")
+    print(f" {nom} a fini (plus de tâches).")
 
 # ─── Programme principal ────────────────────────────────────────────
 if __name__ == "__main__":
     print("=" * 50)
-    print("👨‍🍳 MAÎTRE — DISTRIBUTION DES TÂCHES")
+    print("‍ MAÎTRE — DISTRIBUTION DES TÂCHES")
     print("=" * 50)
     
     # On mémorise l'heure de départ
@@ -116,7 +116,7 @@ if __name__ == "__main__":
 
     print()
     print("=" * 50)
-    print("🥗 SALADE TERMINÉE !")
+    print(" SALADE TERMINÉE !")
     print("=" * 50)
     print(f"Résultats ({len(resultats)}/{len(FRUITS)}) : {resultats}")
     print(f"⏱  Temps total : {duree:.1f} secondes")

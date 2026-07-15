@@ -16,7 +16,7 @@ FRUITS = [
 # ─── Fonction de préparation d'un fruit ─────────────────────────────
 def preparer_fruit(fruit):
     """Simule l'épluchage + découpage d'un fruit (~3 secondes)."""
-    print(f"🔪 Préparation de : {fruit} …")
+    print(f" Préparation de : {fruit} …")
     time.sleep(3)  # simule le travail
     print(f"✅ {fruit} prêt !")
     return f"{fruit} prêt"
@@ -24,7 +24,7 @@ def preparer_fruit(fruit):
 # ─── Programme principal ────────────────────────────────────────────
 if __name__ == "__main__":
     print("=" * 50)
-    print("🍇 SALADE DE FRUITS — VERSION SÉQUENTIELLE")
+    print(" SALADE DE FRUITS — VERSION SÉQUENTIELLE")
     print("=" * 50)
     print(f"Fruits à préparer : {FRUITS}")
     print(f"Nombre de fruits  : {len(FRUITS)}")
@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
     print()
     print("=" * 50)
-    print("🥗 SALADE TERMINÉE !")
+    print(" SALADE TERMINÉE !")
     print("=" * 50)
     print(f"Résultats : {resultats}")
     print(f"⏱  Temps total : {duree:.1f} secondes")

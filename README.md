@@ -1,4 +1,4 @@
-# 🍉 Aide-mémoire : Comment tester
+#  Aide-mémoire : Comment tester
 
 Voici la version ultra-simple pour lancer les 4 étapes de ton projet.
 

@@ -25,11 +25,11 @@ class SlaveService(rpyc.Service):
 
     # Cette méthode est appelée automatiquement quand un client (le maître) se connecte
     def on_connect(self, conn):
-        print("📡 Maître connecté.")
+        print(" Maître connecté.")
 
     # Cette méthode est appelée automatiquement quand le client se déconnecte
     def on_disconnect(self, conn):
-        print("📴 Maître déconnecté.")
+        print(" Maître déconnecté.")
 
     # TRÈS IMPORTANT : Le préfixe "exposed_" indique à RPyC que cette méthode 
     # a le droit d'être appelée à travers le réseau. 
@@ -40,7 +40,7 @@ class SlaveService(rpyc.Service):
         Simule ~3 secondes de travail.
         Renvoie une chaîne confirmant que le fruit est prêt.
         """
-        print(f"🔪 Préparation de : {fruit} …")
+        print(f" Préparation de : {fruit} …")
         
         # On simule un travail qui prend 3 secondes
         time.sleep(3)
@@ -67,7 +67,7 @@ if __name__ == "__main__":
     port = int(sys.argv[1])
 
     print("=" * 50)
-    print(f"🧑‍🍳 ESCLAVE — port {port}")
+    print(f"‍ ESCLAVE — port {port}")
     print("=" * 50)
     print(f"En attente de tâches du maître…")
     print()

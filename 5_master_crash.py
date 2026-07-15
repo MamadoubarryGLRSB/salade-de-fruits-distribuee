@@ -42,7 +42,7 @@ def travailler(port):
     nom = f"Esclave:{port}"
     try:
         conn = rpyc.connect("localhost", port)
-        print(f"📡 {nom} connecté.")
+        print(f" {nom} connecté.")
     except Exception as e:
         print(f"❌ {nom} — connexion impossible : {e}")
         return
@@ -54,7 +54,7 @@ def travailler(port):
                 break
             fruit = pile_taches.pop(0)
 
-        print(f"📤 {nom} ← tâche : {fruit}")
+        print(f" {nom} ← tâche : {fruit}")
 
         try:
             # ── Appel RPC ──
@@ -62,21 +62,21 @@ def travailler(port):
 
             with lock:
                 resultats.append(resultat)
-                print(f"📥 {nom} → résultat : {resultat}")
+                print(f" {nom} → résultat : {resultat}")
 
         except Exception as e:
             # L'esclave a crashé !
-            print(f"💥 {nom} — PANNE pendant « {fruit} » : {e}")
+            print(f" {nom} — PANNE pendant « {fruit} » : {e}")
             print(f"   ⚠️  Le fruit « {fruit} » est PERDU.")
             print(f"   L'esclave {port} ne répond plus.")
             break  # on sort de la boucle, cet esclave est mort
 
-    print(f"🏁 {nom} a terminé.")
+    print(f" {nom} a terminé.")
 
 # ─── Programme principal ────────────────────────────────────────────
 if __name__ == "__main__":
     print("=" * 50)
-    print("👨‍🍳 MAÎTRE (SANS PROTECTION) — PANNES POSSIBLES")
+    print("‍ MAÎTRE (SANS PROTECTION) — PANNES POSSIBLES")
     print("=" * 50)
     print(f"Fruits : {FRUITS}")
     print(f"Esclaves : {PORTS_ESCLAVES}")
@@ -100,7 +100,7 @@ if __name__ == "__main__":
     print()
     print("=" * 50)
     if len(resultats) == len(FRUITS):
-        print("🥗 SALADE TERMINÉE (chanceux, aucun crash !)")
+        print(" SALADE TERMINÉE (chanceux, aucun crash !)")
     else:
         print("⚠️  SALADE INCOMPLÈTE !")
     print("=" * 50)

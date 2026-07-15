@@ -1,8 +1,7 @@
 """
-Étape 4 — Esclave avec crash (pour le test timeout)
+Étape 4 — Esclave avec simulation de panne (fail-stop)
 ======================================================
-Identique à 4_slave_crash.py.
-L'esclave peut crasher — c'est le MAÎTRE qui devient plus intelligent.
+Cet esclave peut s'arrêter brutalement pour tester la résilience du maître.
 """
 
 import os
@@ -12,7 +11,7 @@ import random
 import rpyc
 from rpyc.utils.server import ThreadedServer
 
-# Probabilité de crash (0.3 = 30%)
+# Probabilité d'échec
 PROBA_CRASH = 0.3  
 
 class SlaveTimeoutService(rpyc.Service):
@@ -23,26 +22,19 @@ class SlaveTimeoutService(rpyc.Service):
         print(" Maître déconnecté.")
 
     def exposed_preparer_fruit(self, fruit):
-        """Prépare un fruit ou crashe en essayant."""
+        """Simule la préparation d'un fruit avec possibilité de panne franche."""
         
-        # ── Crash aléatoire ──
-        # random.random() donne un nombre entre 0 et 1.
-        # Si c'est < 0.3 (30% des cas), on déclenche un crash.
+        # ── Simulation de crash ──
         if random.random() < PROBA_CRASH:
             print(f" CRASH pendant : {fruit}")
-            # os._exit(1) tue instantanément le processus Python. 
-            # C'est une PANNE FRANCHE (fail-stop). 
-            # Le maître ne reçoit même pas de message d'erreur, 
-            # la connexion est juste coupée brutalement.
             os._exit(1)
 
-        # Si on survit au crash, on prépare le fruit normalement
         print(f" Préparation de : {fruit} …")
         time.sleep(3)
-        print(f"✅ {fruit} prêt !")
+        print(f" {fruit} prêt !")
         return f"{fruit} prêt"
 
-# ─── Lancement (classique) ──────────────────────────────────────────
+# ─── Lancement ──────────────────────────────────────────────────────
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage : python3 6_slave_timeout.py <port>")
@@ -50,10 +42,10 @@ if __name__ == "__main__":
 
     port = int(sys.argv[1])
     print("=" * 50)
-    print(f"‍ ESCLAVE (TIMEOUT) — port {port}")
+    print(f" ESCLAVE (TIMEOUT) — port {port}")
     print("=" * 50)
-    print(f"⚠️  Probabilité de crash : {PROBA_CRASH*100:.0f}%")
-    print(f"En attente de tâches…")
+    print(f"  Probabilité de crash : {PROBA_CRASH*100:.0f}%")
+    print("En attente de tâches…")
     print()
 
     serveur = ThreadedServer(SlaveTimeoutService, port=port)
